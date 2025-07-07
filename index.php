@@ -19,7 +19,7 @@
     }
 
     .banner {
-      background-image: url('img/banner.jpg'); /* Ajusta según tu ruta */
+      background-image: url('/img/banner.png');
       background-size: cover;
       background-position: center;
       height: 300px;
@@ -123,8 +123,3 @@
 </html>
 <?php
 // Cerrar conexión a la base de datos si es necesario
-// include 'php/cerrar_conexion.php'; // Descomentar si tienes un archivo para cerrar la conexión
-?>
-<?php
-// Fin del archivo index.php
-// Puedes agregar más secciones o funcionalidades según sea necesario

@@ -1,13 +1,25 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 
 // Verificar si el usuario es administrador
 $es_admin = isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
+
+// Incluir conexión a la base de datos
+include __DIR__ . '/php/conexion.php';
+
+$result = null;
+
+if ($es_admin) {
+  $sql = "SELECT * FROM pedidos ORDER BY fecha_pedido DESC";
+  $result = $conn->query($sql);
+
+  if (!$result) {
+    echo "<p>Error al obtener los pedidos: " . $conn->error . "</p>";
+  }
+}
 ?>
-<!DOCTYPE html>
-<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -56,14 +68,15 @@ $es_admin = isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
     }
 
     button {
-      background-color: #007bff;
-      color: white;
+      background-color: #000;
+      color: #fff;
       border: none;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: #333;
     }
 
     .tabla-contenedor {
@@ -161,24 +174,31 @@ $es_admin = isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin';
           <th>Fecha</th>
           <th>Entregado</th>
         </tr>
-        <?php while ($fila = $result->fetch_assoc()): ?>
-          <form action="php/actualizar_entrega.php" method="post">
-            <tr>
-              <td><?= htmlspecialchars($fila['nombre_completo']) ?></td>
-              <td><?= htmlspecialchars($fila['tipo_documento']) ?>     <?= htmlspecialchars($fila['documento']) ?></td>
-              <td><?= htmlspecialchars($fila['menu_seleccionado']) ?></td>
-              <td><?= htmlspecialchars($fila['mesa']) ?></td>
-              <td><?= htmlspecialchars($fila['fecha_pedido']) ?></td>
-              <td>
-                <input type="hidden" name="id" value="<?= $fila['id'] ?>">
-                <input type="checkbox" name="entregado" onchange="this.form.submit()" <?= $fila['entregado'] ? 'checked' : '' ?>>
-                <span class="estado <?= $fila['entregado'] ? 'entregado' : 'no-entregado' ?>">
-                  <?= $fila['entregado'] ? 'Entregado' : 'No entregado' ?>
-                </span>
-              </td>
-            </tr>
-          </form>
-        <?php endwhile; ?>
+
+        <?php if ($result && $result->num_rows > 0): ?>
+          <?php while ($fila = $result->fetch_assoc()): ?>
+            <form action="php/actualizar_entrega.php" method="post">
+              <tr>
+                <td><?= htmlspecialchars($fila['nombre_completo']) ?></td>
+                <td><?= htmlspecialchars($fila['tipo_documento']) ?>       <?= htmlspecialchars($fila['documento']) ?></td>
+                <td><?= htmlspecialchars($fila['menu_seleccionado']) ?></td>
+                <td><?= htmlspecialchars($fila['mesa']) ?></td>
+                <td><?= htmlspecialchars($fila['fecha_pedido']) ?></td>
+                <td>
+                  <input type="hidden" name="id" value="<?= $fila['id'] ?>">
+                  <input type="checkbox" name="entregado" onchange="this.form.submit()" <?= $fila['entregado'] ? 'checked' : '' ?>>
+                  <span class="estado <?= $fila['entregado'] ? 'entregado' : 'no-entregado' ?>">
+                    <?= $fila['entregado'] ? 'Entregado' : 'No entregado' ?>
+                  </span>
+                </td>
+              </tr>
+            </form>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="6" style="text-align: center;">No hay pedidos para mostrar.</td>
+          </tr>
+        <?php endif; ?>
       </table>
     </div>
   <?php endif; ?>
