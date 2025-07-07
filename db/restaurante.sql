@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS pedidos (
     celular VARCHAR(15),
     correo VARCHAR(100),
     menu_seleccionado VARCHAR(50),
-    mesa_opcion VARCHAR(20),
+    mesa VARCHAR(20), -- renombrado de mesa_opcion a mesa para coincidir con el PHP
+    entregado TINYINT(1) DEFAULT 0, -- ✅ Campo agregado
     fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
