@@ -1,36 +1,53 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
+/* Contenedor centrado para la tabla */
+.tabla-contenedor {
+  max-width: 1000px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-header {
-  background-color: #222;
+/* Tabla de administración/pedidos */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+}
+
+th, td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+th {
+  background-color: #343a40;
   color: white;
-  padding: 1em;
-  text-align: center;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
+tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-nav ul li {
-  display: inline-block;
-  margin: 0 1em;
+/* Checkbox */
+input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
-nav ul li a {
-  color: white;
-  text-decoration: none;
+/* Texto entrega */
+.estado {
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
-footer {
-  background-color: #222;
-  color: white;
-  text-align: center;
-  padding: 1em;
-  margin-top: 3em;
+.estado.entregado {
+  color: #28a745;
+}
+
+.estado.no-entregado {
+  color: #dc3545;
 }
