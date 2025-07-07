@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <header>
+    <h1>Contacto</h1>
+    <?php include 'templates/navegador.php'; ?>
+  </header>
   <h1>Contáctenos</h1>
   <form>
     <input type="text" placeholder="Nombre completo" required><br>

@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+   <header>
+    <h1>Pedidos del Restaurante Delicias</h1>
+    <?php include 'templates/navegador.php'; ?>
+  </header>
   <form action="php/guardar_pedido.php" method="post">
     <input name="documento" placeholder="Documento" required>
     <select name="tipo_documento">

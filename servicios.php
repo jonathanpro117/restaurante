@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+   <header>
+    <h1>Servicios</h1>
+     <?php include 'templates/navegador.php'; ?>
+  </header>
   <h1>Servicios</h1>
   <section class="card-container">
     <div class="card">

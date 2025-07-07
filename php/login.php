@@ -17,6 +17,6 @@ if ($stmt->fetch() && password_verify($pass, $hash)) {
     $_SESSION['rol'] = $rol;
     header("Location: ../admin/index.php");
 } else {
-    header("Location: ../login.html?error=1");
+    header("Location: ../login.php?error=1");
 }
 ?>

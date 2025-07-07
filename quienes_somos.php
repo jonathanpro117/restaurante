@@ -11,9 +11,9 @@
   </style>
 </head>
 <body>
-  <header>
+   <header>
     <h1>Quiénes somos</h1>
-    <a href="index.php">Inicio</a>
+    <?php include 'templates/navegador.php'; ?>
   </header>
   <section>
     <div class="carousel">

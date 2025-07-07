@@ -31,7 +31,7 @@ $result = $conn->query($sql);
 <body>
   <header>
     <h1>Pedidos Registrados</h1>
-    <nav><a href="../index.html">Inicio</a></nav>
+    <?php include 'templates/navegador.php'; ?>
   </header>
 
   <main>
